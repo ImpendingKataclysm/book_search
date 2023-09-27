@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <div class="main_wrap">
+        <header>
+            <figure>
+                <img src="{% static 'images/book_logo.jpg' %}" alt="Book logo">
+            </figure>
+            <div>
+                <h1>Book Finder</h1>
+            </div>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            <p>
+                Book logo image available at
+                <a href="https://www.vecteezy.com/free-vector/book-icon" target="_blank">Pen Icon Vectors by Vecteezy</a>.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

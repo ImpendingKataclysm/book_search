@@ -1,0 +1,26 @@
+/* General Page Styles */
+
+body {
+    font-family: Calibri, sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+.main_wrap {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    align-items: center;
+}
+
+header figure {
+    max-width: 20%;
+}
