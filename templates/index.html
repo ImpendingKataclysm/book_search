@@ -3,5 +3,8 @@
 {% block title %}Search{% endblock %}
 
 {% block content %}
-    <p>Book Search coming soon...</p>
+    <form action="{% url 'book_search:search' %}">
+        {{ form.as_p }}
+        <input type="submit" value="Search">
+    </form>
 {% endblock %}
