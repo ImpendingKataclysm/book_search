@@ -11,7 +11,6 @@ class SearchPage(generic.FormView):
     success_url = '/results/'
 
     def form_valid(self, form):
-        search_query = form.cleaned_data['book_title']
         return super(SearchPage, self).form_valid(form)
 
 
@@ -21,12 +20,27 @@ class ResultsPage(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ResultsPage, self).get_context_data()
-        search_query = self.request.GET.get('book_title')
+        search_query = None
+        params = None
+        title = self.request.GET.get('book_title')
+        author = self.request.GET.get('author_name')
+        subject = self.request.GET.get('subject_keyword')
+
+        if title:
+            search_query = title
+            params = {'title': search_query}
+
+        if author:
+            search_query = author
+            params = {'author': author}
+
+        if subject:
+            search_query = subject
+            params = {'subject': subject}
 
         if search_query:
-            response = requests.get(self.search_api_url, params={'title': search_query})
+            response = requests.get(self.search_api_url, params=params)
             books = response.json()['docs']
-            titles = [book['title'] for book in books]
             context['search_query'] = search_query
             context['books'] = books
 
