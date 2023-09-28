@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Search{% endblock %}
 
@@ -14,4 +15,6 @@
         {{ form.as_p }}
         <input type="submit" value="Search">
     </form>
+
+    <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}
