@@ -7,6 +7,7 @@ app_name = 'book_search'
 
 urlpatterns = [
     path('', views.SearchPage.as_view(), name='search'),
+    path('results/', views.ResultsPage.as_view(), name='results')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
