@@ -4,4 +4,23 @@
 
 {% block content %}
     <h2>Showing results for "{{ search_query }}":</h2>
+    <a href="{% url 'book_search:search' %}">Search again</a>
+    <div class="results_list">
+        {% for book in books %}
+            <div class="book_wrap">
+                <h3>{{ book.title }}</h3>
+                {% if book.cover_i %}
+                    <img src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-L.jpg" alt="cover">
+                {% else %}
+                    <p>Image unavailable</p>
+                {% endif %}
+                <p>Author(s):</p>
+                <ul>
+                    {% for author in book.author_name %}
+                        <li>{{ author }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

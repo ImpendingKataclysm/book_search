@@ -24,3 +24,14 @@ header {
 header figure {
     max-width: 20%;
 }
+
+/* Results Display*/
+
+.results_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.book_wrap {
+    max-width: 50rem;
+}
