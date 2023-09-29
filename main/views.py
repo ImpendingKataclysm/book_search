@@ -54,7 +54,11 @@ class ResultsPage(generic.TemplateView):
 
         if search_query:
             response = requests.get(self.search_api_url, params=params)
-            books = response.json()['docs']
+            r_json = response.json()
+            num_found = r_json['numFound']
+            books = r_json['docs']
+
+            context['num_found'] = num_found
             context['search_query'] = search_query
             context['books'] = books
 
