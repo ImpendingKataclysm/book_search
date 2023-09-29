@@ -6,8 +6,12 @@ from . import forms
 
 
 class SearchPage(generic.FormView):
+    """
+    Display the book search form. The form allows users to select a search key
+    (title, author or subject) and then enter a search query.
+    """
     template_name = 'index.html'
-    form_class = forms.TitleSearchForm
+    form_class = forms.SearchForm
     success_url = '/results/'
 
     def form_valid(self, form):
@@ -15,10 +19,20 @@ class SearchPage(generic.FormView):
 
 
 class ResultsPage(generic.TemplateView):
+    """
+    Get the search results from the OpenLibrary API and display them in the
+    browser.
+    """
     template_name = 'results.html'
     search_api_url = 'https://openlibrary.org/search.json'
 
     def get_context_data(self, **kwargs):
+        """
+        Get the search query entered by the user, and use the query to search
+        the OpenLibrary API.
+        :param kwargs:
+        :return: context data containing the search query and its results
+        """
         context = super(ResultsPage, self).get_context_data()
         search_query = None
         params = None
