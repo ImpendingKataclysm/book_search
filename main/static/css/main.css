@@ -25,13 +25,24 @@ header figure {
     max-width: 20%;
 }
 
+/* Search Form */
+
+.form_wrap {
+    width: 60%;
+    margin: auto;
+}
+
 /* Results Display*/
 
 .results_list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
 }
 
-.book_wrap {
-    max-width: 50rem;
+@media screen and (max-width:760px) {
+
+    .results_list {
+        grid-template-columns: 1fr 1fr;
+    }
 }
