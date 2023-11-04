@@ -11,19 +11,72 @@
                 action="{% url 'book_search:results' %}"
                 class="d-grid gap-2"
             >
-                <p>Search By: </p>
-                <input type="radio" id="search_title" name="search_criteria" value="title" checked>
-                <label for="search_title">Title</label>
-                <input type="radio" id="search_author" name="search_criteria" value="author">
-                <label for="search_author">Author</label>
-                <input type="radio" id="search_subject" name="search_criteria" value="subject">
-                <label for="search_subject">Subject</label>
-                {{ form.book_title.label }}
-                {{ form.book_title }}
-                {{ form.author_name.label }}
-                {{ form.author_name }}
-                {{ form.subject_keyword.label }}
-                {{ form.subject_keyword }}
+                <p>Search By (choose 1): </p>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a
+                                href="#collapseTitle"
+                                class="btn d-block w-100 text-start"
+                                data-bs-toggle="collapse"
+                                id="titleSelect"
+                            >
+                                {{ form.book_title.label }}
+                            </a>
+                        </div>
+                        <div
+                            id="collapseTitle"
+                            class="collapse"
+                            data-bs-parent="#accordion"
+                        >
+                            <div class="card-body">
+                                {{ form.book_title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a
+                                href="#collapseAuthor"
+                                class="btn d-block w-100 text-start"
+                                data-bs-toggle="collapse"
+                                id="authorSelect"
+                            >
+                                {{ form.author_name.label }}
+                            </a>
+                        </div>
+                        <div
+                            id="collapseAuthor"
+                            class="collapse"
+                            data-bs-parent="#accordion"
+                        >
+                            <div class="card-body">
+                                {{ form.author_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <a
+                                href="#collapseSubject"
+                                class="btn d-block w-100 text-start"
+                                data-bs-toggle="collapse"
+                                id="subjectSelect"
+                            >
+                                {{ form.subject_keyword.label }}
+                            </a>
+                        </div>
+                        <div
+                            id="collapseSubject"
+                            class="collapse"
+                            data-bs-parent="#accordion"
+                        >
+                            <div class="card-body">
+                                {{ form.subject_keyword }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input
                     type="submit"
                     value="Search"
