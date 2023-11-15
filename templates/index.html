@@ -6,11 +6,7 @@
 {% block content %}
     <div class="card">
         <div class="card-body">
-            <form
-                method="get"
-                action="{% url 'book_search:results' %}"
-                class="d-grid gap-2"
-            >
+            <form method="get" action="{% url 'book_search:results' %}">
                 <p>Search By (choose 1): </p>
                 <div id="accordion">
                     <div class="card">
@@ -80,7 +76,7 @@
                 <input
                     type="submit"
                     value="Search"
-                    class="btn btn-secondary"
+                    class="btn btn-secondary form-control"
                 >
             </form>
         </div>
