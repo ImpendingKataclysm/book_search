@@ -3,7 +3,7 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-    <h2 class="display-3">
+    <h2 class="display-4">
         Showing {{ num_found }} results for "{{ search_query }}":
     </h2>
     <a href="{% url 'book_search:search' %}" class="btn btn-outline-primary">
@@ -11,28 +11,42 @@
     </a>
     <div class="results_list">
         {% for book in books %}
-            <div class="card my-3">
-                <div class="card-header">
-                    <h3 class="card-title display-6">{{ book.title }}</h3>
+            {% if forloop.counter0|divisibleby:3 %}
+                <div class="row align-items-stretch gap-3">
+            {% endif %}
+                <div class="card my-3 px-0 col-md">
+                    <div class="card-header text-bg-primary">
+                        <h3 class="card-title display-6">{{ book.title }}</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if book.cover_i %}
+                            <figure class="d-flex justify-content-center">
+                                <img
+                                    src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-L.jpg"
+                                    alt="cover"
+                                    class="img-fluid rounded"
+                                >
+                            </figure>
+                        {% else %}
+                            <p>Image unavailable</p>
+                        {% endif %}
+                        <ul class="list-group">
+                            {% for author in book.author_name %}
+                                <li class="list-group-item text-bg-info fs-5 fw-bold fst-italic">
+                                    {{ author }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <p class="fs-5 mt-3">
+                            First published: {{ book.first_publish_year }}
+                        </p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% if book.cover_i %}
-                        <img
-                            src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-L.jpg"
-                            alt="cover"
-                            class="img-fluid rounded"
-                        >
-                    {% else %}
-                        <p>Image unavailable</p>
-                    {% endif %}
-                    <ul class="list-group">
-                        {% for author in book.author_name %}
-                            <li class="list-group-item">{{ author }}</li>
-                        {% endfor %}
-                    </ul>
-                    <p>First published: {{ book.first_publish_year }}</p>
+            {% if forloop.last and not forloop.counter0|divisibleby:3 %}
                 </div>
-            </div>
+            {% elif forloop.counter|divisibleby:3 or forloop.last %}
+                </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
