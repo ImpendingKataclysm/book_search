@@ -12,11 +12,13 @@
     <div class="container">
         <header class="d-flex align-items-center mt-5">
             <figure class="w-25 p-3">
-                <img
-                    src="{% static 'images/book_logo.png' %}"
-                    alt="Book logo"
-                    class="img-fluid"
-                >
+                <a href="{% url 'book_search:search' %}">
+                    <img
+                        src="{% static 'images/book_logo.png' %}"
+                        alt="Book logo"
+                        class="img-fluid"
+                    >
+                </a>
             </figure>
             <div>
                 <h1 class="display-1">Book Finder</h1>
@@ -25,7 +27,7 @@
         <main>
             {% block content %}{% endblock %}
         </main>
-        <footer class="fixed-bottom">
+        <footer class="fixed-bottom bg-dark pt-2">
             <p class="small text-muted">
                 Book logo image available at
                 <a
