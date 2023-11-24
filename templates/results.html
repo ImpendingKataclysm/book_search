@@ -22,7 +22,7 @@
                         {% if book.cover_i %}
                             <figure class="d-flex justify-content-center">
                                 <img
-                                    src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-L.jpg"
+                                    src="https://covers.openlibrary.org/b/id/{{ book.cover_i }}-M.jpg"
                                     alt="cover"
                                     class="img-fluid rounded"
                                 >
@@ -40,6 +40,7 @@
                         <p class="fs-5 mt-3">
                             First published: {{ book.first_publish_year }}
                         </p>
+                        <a href="{% url 'book_search:detail' book.key|slice:'7:' %}">See details</a>
                     </div>
                 </div>
             {% if forloop.last and not forloop.counter0|divisibleby:3 %}

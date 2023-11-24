@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Details for {{ title }}{% endblock %}
+
+{% block content %}
+    <h2 class="display-3">
+        {{ title }}
+        {% if subtitle %}
+            : {{ subtitle }}
+        {% endif %}
+    </h2>
+    {% if cover %}
+        <figure>
+            <img
+                src="https://covers.openlibrary.org/b/id/{{ cover }}-L.jpg"
+                alt="cover art for {{ title }}"
+                class="d-block mx-auto mw-100"
+            >
+        </figure>
+    {% else %}
+        <p>Cover image not available</p>
+    {% endif %}
+    {% if description %}
+        <p>{{ description }}</p>
+    {% endif %}
+    {% if first_publish_date %}
+        <p>First published: {{ first_publish_date }}</p>
+    {% endif %}
+    {% if links %}
+        <h3>Links</h3>
+        <ul>
+            {% for link in links %}
+                <li>
+                    <a href="{{ link.url }}" target="_blank">
+                        {{ link.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if authors %}
+        <dl class="list-group mb-3">
+            {% for author in authors %}
+                <div class="list-group-item d-md-flex gap-2">
+                    {% if author.photos %}
+                        <figure class="col-md-3 mx-auto">
+                            <img
+                                src="https://covers.openlibrary.org/b/id/{{ author.photos.0 }}-M.jpg"
+                                alt="photo of {{ author.name }}"
+                                class="d-block mx-auto mw-100"
+                            >
+                        </figure>
+                    {% else %}
+                        <p>No photo available</p>
+                    {% endif %}
+                    <div class="col-md-9">
+                        <dt>
+                            <strong>
+                                {{ author.name }}
+                                {% if author.title %}
+                                    {{ author.title }}
+                                {% endif %}
+                            </strong>
+                            {% if author.birth_date %}
+                                 | {{ author.birth_date }}
+                            {% endif %}
+                        </dt>
+                        {% if author.bio %}
+                            <dd class="mw-100">
+                                {{ author.bio }}
+                                {% if author.wikipedia %}
+                                    <a href="{{ author.wikipedia }}" target="_blank">
+                                        Wikipedia
+                                    </a>
+                                {% endif %}
+                            </dd>
+                        {% endif %}
+                        {% if author.links %}
+                            <dt>Links</dt>
+                            {% for link in author.links %}
+                                <dd>
+                                    <a href="{{link.url }}" target="_blank">
+                                        {{ link.title }}
+                                    </a>
+                                </dd>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </dl>
+    {% endif %}
+    {% if places %}
+        <h3>Key Locations</h3>
+        <ul>
+            {% for place in places %}
+                <li>{{ place }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if time_period %}
+        <h3>Time Period</h3>
+        <ul>
+            {% for time in time_period %}
+                <li>{{ time }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if characters %}
+        <h3>Key Persons</h3>
+        <ul>
+            {% for character in characters %}
+                <li>{{ character }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if subjects %}
+        <h3>Subjects</h3>
+        <ul>
+            {% for subject in subjects %}
+                <li>{{ subject }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

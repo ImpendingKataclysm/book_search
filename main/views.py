@@ -1,8 +1,8 @@
 import requests
-from django.shortcuts import render, redirect
-from django.views import generic, View
-from django.urls import reverse
+from django.views import generic
 from . import forms
+
+API_URL = 'https://openlibrary.org'
 
 
 class SearchPage(generic.FormView):
@@ -24,7 +24,7 @@ class ResultsPage(generic.TemplateView):
     browser.
     """
     template_name = 'results.html'
-    search_api_url = 'https://openlibrary.org/search.json'
+    search_api_url = f'{API_URL}/search.json'
 
     def get_context_data(self, **kwargs):
         """
@@ -63,3 +63,69 @@ class ResultsPage(generic.TemplateView):
             context['books'] = books
 
         return context
+
+
+class BookDetailPage(generic.TemplateView):
+    template_name = 'detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailPage, self).get_context_data()
+        book_id = kwargs['id']
+        query = f'{API_URL}/works/{book_id}.json'
+        response = requests.get(query)
+        r_json = response.json()
+
+        if 'title' in r_json:
+            context['title'] = r_json['title']
+
+        if 'subtitle' in r_json:
+            context['subtitle'] = r_json['subtitle']
+
+        if 'covers' in r_json:
+            covers = [cover for cover in r_json['covers'] if cover > 0]
+            context['cover'] = covers[0]
+
+        if 'first_publish_date' in r_json:
+            context['first_publish_date'] = r_json['first_publish_date']
+
+        if 'subjects' in r_json:
+            context['subjects'] = r_json['subjects']
+
+        if 'subject_times' in r_json:
+            context['time_period'] = r_json['subject_times']
+
+        if 'authors' in r_json:
+            author_keys = [author['author']['key'] for author in r_json['authors']]
+            authors = []
+
+            for key in author_keys:
+                author_query = f'{API_URL}{key}.json'
+                author = requests.get(author_query).json()
+                authors.append(author)
+
+            context['authors'] = authors
+
+        if 'description' in r_json:
+            description = r_json['description']
+            source_tag = '([source'
+
+            if isinstance(description, dict):
+                description = description['value']
+
+            if source_tag in description.lower():
+                d_text = description.split(source_tag)
+                description = d_text[0]
+
+            context['description'] = description
+
+        if 'subject_places' in r_json:
+            context['places'] = [place for place in r_json['subject_places']]
+
+        if 'subject_people' in r_json:
+            context['characters'] = r_json['subject_people']
+
+        if 'links' in r_json:
+            context['links'] = r_json['links']
+
+        return context
+
