@@ -10,6 +10,11 @@
             : {{ subtitle }}
         {% endif %}
     </h2>
+    <a
+        class="btn btn-outline-primary"
+        href="{% url 'book_search:results' %}?{% for key, value in query_params %}{{ key }}={{ value }}{% if not forloop.last %}&{% endif %}{% endfor %}">
+        Back to results
+    </a>
     {% if cover %}
         <figure>
             <img

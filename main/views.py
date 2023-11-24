@@ -75,6 +75,8 @@ class BookDetailPage(generic.TemplateView):
         response = requests.get(query)
         r_json = response.json()
 
+        context['query_params'] = self.request.GET.items()
+
         if 'title' in r_json:
             context['title'] = r_json['title']
 
@@ -128,4 +130,3 @@ class BookDetailPage(generic.TemplateView):
             context['links'] = r_json['links']
 
         return context
-

@@ -40,7 +40,9 @@
                         <p class="fs-5 mt-3">
                             First published: {{ book.first_publish_year }}
                         </p>
-                        <a href="{% url 'book_search:detail' book.key|slice:'7:' %}">See details</a>
+                        <a href="{% url 'book_search:detail' book.key|slice:'7:' %}?{% for key, value in request.GET.items %}{{ key }}={{ value }}{% if not forloop.last %}&{% endif %}{% endfor %}">
+                            See details
+                        </a>
                     </div>
                 </div>
             {% if forloop.last and not forloop.counter0|divisibleby:3 %}
