@@ -24,22 +24,27 @@
                 <h1 class="display-1">Book Finder</h1>
             </div>
         </header>
-        <main class="mb-5 p-0">
+        <main class="mb-5 pb-3" id="top">
             {% block content %}{% endblock %}
         </main>
-        <footer class="fixed-bottom bg-dark pt-2">
-            <p class="small text-muted">
-                All book data sourced from
-                <a href="https://openlibrary.org/" target="_blank">
-                    Open Library
-                </a>. Book logo image available at
-                <a
-                    href="https://www.vecteezy.com/free-vector/book-icon"
-                    target="_blank"
-                >
-                    Pen Icon Vectors by Vecteezy
-                </a>.
-            </p>
+        <footer class="fixed-bottom bg-dark d-md-flex">
+            <div class="col-md-10">
+                <p class="small text-muted pt-3 ps-3">
+                    All book data sourced from
+                    <a href="https://openlibrary.org/" target="_blank">
+                        Open Library
+                    </a>. Book logo image available at
+                    <a
+                        href="https://www.vecteezy.com/free-vector/book-icon"
+                        target="_blank"
+                    >
+                        Pen Icon Vectors by Vecteezy
+                    </a>.
+                </p>
+            </div>
+            <div class="col-md-2 p-2">
+                <a class="btn btn-outline-primary w-100" href="#top">Top</a>
+            </div>
         </footer>
     </div>
 </body>
