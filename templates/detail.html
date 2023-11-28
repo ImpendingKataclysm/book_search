@@ -39,7 +39,7 @@
                     <p>
                         To add a description, visit
                         <a
-                            href="https://openlibrary.org{{ works_key }}"
+                            href="{{ works_link }}"
                             target="_blank"
                         >
                             Open Library
@@ -61,6 +61,11 @@
                         First published: {{ first_publish_date }}
                     </p>
                 {% endif %}
+                <p>
+                    <a href="{{ works_link }}" target="_blank">
+                        Edit/add to this entry on Open Library
+                    </a>
+                </p>
             </div>
         </li>
         {% if links %}

@@ -78,7 +78,7 @@ class BookDetailPage(generic.TemplateView):
         context['query_params'] = self.request.GET.items()
 
         if 'key' in r_json:
-            context['works_key'] = r_json['key']
+            context['works_link'] = f"https://openlibrary.org{r_json['key']}"
 
         if 'title' in r_json:
             context['title'] = r_json['title']
