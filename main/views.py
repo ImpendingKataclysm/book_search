@@ -77,6 +77,9 @@ class BookDetailPage(generic.TemplateView):
 
         context['query_params'] = self.request.GET.items()
 
+        if 'key' in r_json:
+            context['works_key'] = r_json['key']
+
         if 'title' in r_json:
             context['title'] = r_json['title']
 
@@ -109,14 +112,15 @@ class BookDetailPage(generic.TemplateView):
 
         if 'description' in r_json:
             description = r_json['description']
-            source_tag = '([source'
+            tags = ['([source', '------', '[Source']
 
             if isinstance(description, dict):
                 description = description['value']
 
-            if source_tag in description.lower():
-                d_text = description.split(source_tag)
-                description = d_text[0]
+            for tag in tags:
+                if tag.lower() in description.lower():
+                    d_text = description.split(tag)
+                    description = d_text[0]
 
             context['description'] = description
 
