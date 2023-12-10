@@ -20,19 +20,13 @@ class SearchPage(generic.FormView):
 
 class ResultsPage(generic.TemplateView):
     """
-    Get the search results from the OpenLibrary API and display them in the
-    browser.
+    Search the OpenLibrary Books API with the query entered by the user, then display
+    the results
     """
     template_name = 'results.html'
     search_api_url = f'{API_URL}/search.json'
 
     def get_context_data(self, **kwargs):
-        """
-        Get the search query entered by the user, and use the query to search
-        the OpenLibrary API.
-        :param kwargs:
-        :return: context data containing the search query and its results
-        """
         context = super(ResultsPage, self).get_context_data()
         search_query = None
         params = None
@@ -66,6 +60,10 @@ class ResultsPage(generic.TemplateView):
 
 
 class BookDetailPage(generic.TemplateView):
+    """
+    Display a Details page for a requested book by searching the OpenLibrary
+    Works API with the book's id.
+    """
     template_name = 'detail.html'
 
     def get_context_data(self, **kwargs):
